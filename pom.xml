@@ -30,6 +30,20 @@
             <version>${vertx.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-config -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-config</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-config-yaml -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-config-yaml</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+
 
     </dependencies>
 
