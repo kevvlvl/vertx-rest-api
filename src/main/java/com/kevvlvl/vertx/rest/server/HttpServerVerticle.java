@@ -1,12 +1,13 @@
 package com.kevvlvl.vertx.rest.server;
 
-import com.kevvlvl.vertx.rest.route.HealthRoute;
+import com.kevvlvl.vertx.rest.route.FinanceRoute;
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Router;
 
 public class HttpServerVerticle extends AbstractVerticle {
 
@@ -26,7 +27,7 @@ public class HttpServerVerticle extends AbstractVerticle {
 
                 try {
                     vertx.createHttpServer()
-                            .requestHandler(new HealthRoute(vertx).defineRoute())
+                            .requestHandler(new FinanceRoute(this.vertx, "/api/fin").defineRoute())
                             .listen(conf.result().getJsonObject(ServerConstant.CONFIG_HTTP_ROOT).getInteger(ServerConstant.CONFIG_HTTP_KEY),
                                     result -> {
                                         if (result.succeeded()) {
