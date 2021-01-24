@@ -8,19 +8,20 @@ import io.vertx.ext.web.RoutingContext;
 
 import java.math.BigDecimal;
 
-public class FinanceRoute {
+public class MainRoute {
 
     private final Router router;
-    private final String endpoint;
 
-    public FinanceRoute(Vertx vertx, String endpoint) {
+    public MainRoute(Vertx vertx) {
         this.router = Router.router(vertx);
-        this.endpoint = endpoint;
     }
 
     public Router defineRoute() {
 
-        router.get(this.endpoint + "?:symbolName")
+        this.router.route("/api/fin").handler(this::getStockData);
+        this.router.route("/api/health").handler(this::getHealth);
+
+        router.get("/api/fin?:symbolName")
                 .handler(this::getStockData);
 
         return router;
@@ -36,5 +37,13 @@ public class FinanceRoute {
                 .putHeader("content-type", "application/json")
                 .setStatusCode(200)
                 .end(Json.encodePrettily(stock));
+    }
+
+    private void getHealth(RoutingContext context) {
+
+        context.response()
+                .putHeader("content-type", "text/plain")
+                .setStatusCode(200)
+                .end("Service is UP");
     }
 }
