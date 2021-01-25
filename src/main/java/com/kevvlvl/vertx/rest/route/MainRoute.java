@@ -18,11 +18,8 @@ public class MainRoute {
 
     public Router defineRoute() {
 
-        this.router.route("/api/fin").handler(this::getStockData);
+        this.router.route("/api/fin?:symbolName").handler(this::getStockData);
         this.router.route("/api/health").handler(this::getHealth);
-
-        router.get("/api/fin?:symbolName")
-                .handler(this::getStockData);
 
         return router;
 
