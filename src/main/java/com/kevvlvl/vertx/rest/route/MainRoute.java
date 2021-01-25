@@ -1,6 +1,7 @@
 package com.kevvlvl.vertx.rest.route;
 
 import com.kevvlvl.vertx.rest.model.Stock;
+import com.kevvlvl.vertx.rest.server.ServerConstant;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
@@ -18,20 +19,19 @@ public class MainRoute {
 
     public Router defineRoute() {
 
-        this.router.route("/api/fin?:symbolName").handler(this::getStockData);
-        this.router.route("/api/health").handler(this::getHealth);
+        this.router.get("/api/fin?:symbolName").produces(ServerConstant.APPLICATION_JSON).handler(this::getStockData);
+        this.router.get("/api/health").handler(this::getHealth);
 
         return router;
-
     }
 
-    private void getStockData(RoutingContext context) {
+    private void getStockData(RoutingContext ctx) {
 
-        String symbolName = context.request().getParam("symbolName");
+        String symbolName = ctx.request().getParam("symbolName");
         Stock stock = new Stock(symbolName, BigDecimal.valueOf(10));
 
-        context.response()
-                .putHeader("content-type", "application/json")
+        ctx.response()
+                .putHeader("content-type", ServerConstant.APPLICATION_JSON)
                 .setStatusCode(200)
                 .end(Json.encodePrettily(stock));
     }
