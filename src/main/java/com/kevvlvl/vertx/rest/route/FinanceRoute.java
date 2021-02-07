@@ -9,8 +9,9 @@ import io.vertx.ext.web.RoutingContext;
 
 import java.math.BigDecimal;
 
-public class FinanceRoute {
+public class FinanceRoute implements IRoute {
 
+    @Override
     public Router router(Vertx vertx) {
         final Router appRouter = Router.router(vertx);
         appRouter.get("/fin?:symbolName").produces(ServerConstant.APPLICATION_JSON).handler(this::getStockData);

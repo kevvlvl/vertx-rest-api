@@ -5,8 +5,9 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
-public class HealthRoute {
+public class HealthRoute implements IRoute {
 
+    @Override
     public Router router(Vertx vertx) {
         final Router appRouter = Router.router(vertx);
         appRouter.get("/health").produces(ServerConstant.APPLICATION_JSON).handler(this::getHealth);
