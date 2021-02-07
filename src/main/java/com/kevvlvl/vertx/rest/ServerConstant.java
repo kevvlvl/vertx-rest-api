@@ -1,4 +1,4 @@
-package com.kevvlvl.vertx.rest.server;
+package com.kevvlvl.vertx.rest;
 
 public class ServerConstant {
 
@@ -12,4 +12,6 @@ public class ServerConstant {
     public static final String CONFIG_HTTP_KEY = "port";
 
     public static final String APPLICATION_JSON = "application/json";
+
+    public static final String ENDPOINT_PREFIX = "/api/v1";
 }
